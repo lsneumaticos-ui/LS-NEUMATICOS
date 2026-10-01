@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LS Neumáticos | Neumáticos y ruedas de auxilio</title>
+<meta name="description" content="LS Neumáticos - neumáticos, ruedas de auxilio y asesoramiento.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><span class="brand-mark">LS</span><span>NEUMÁTICOS</span></a>
+    <nav><a href="#catalogo">Catálogo</a><a href="#auxilio">Ruedas de auxilio</a><a href="#envios">Envíos</a><a href="#contacto">Contacto</a></nav>
+    <button class="cart-btn" onclick="openCart()">🛒 Carrito <b id="cartCount">0</b></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">LS NEUMÁTICOS</p>
+      <h1>Neumáticos y ruedas de auxilio para tu vehículo</h1>
+      <p class="lead">Consultá medidas, disponibilidad y precios. Atención personalizada por WhatsApp.</p>
+      <a class="btn primary" href="#catalogo">Ver catálogo</a>
+      <a class="btn outline" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos,%20quiero%20consultar%20por%20un%20producto." target="_blank">WhatsApp</a>
+    </div>
+    <div class="hero-card">
+      <div class="tire">◉</div>
+      <strong>¿No sabés qué medida necesitás?</strong>
+      <span>Mandanos una foto de tu cubierta o del vehículo y te asesoramos.</span>
+    </div>
+  </div>
+</section>
+
+<main>
+<section id="catalogo" class="wrap section">
+  <div class="section-head"><div><p class="eyebrow">CATÁLOGO</p><h2>Productos</h2></div>
+    <input id="search" class="search" placeholder="Buscar medida, marca o vehículo..." oninput="renderProducts()">
+  </div>
+  <div class="chips" id="chips"></div>
+  <div id="products" class="products"></div>
+</section>
+
+<section id="auxilio" class="dark-section">
+  <div class="wrap two">
+    <div><p class="eyebrow">RUEDAS DE AUXILIO</p><h2>¿Tu vehículo chino no trae rueda de auxilio?</h2>
+    <p>Consultanos por opciones compatibles para BYD, Haval, Link & Co y otros modelos.</p>
+    <a class="btn primary" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos,%20quiero%20consultar%20por%20una%20rueda%20de%20auxilio." target="_blank">Consultar por WhatsApp</a></div>
+    <div class="feature-list"><div>✓ Compatibilidad por modelo</div><div>✓ Asesoramiento</div><div>✓ Precio a consultar</div></div>
+  </div>
+</section>
+
+<section id="envios" class="wrap section">
+  <p class="eyebrow">ENTREGAS</p><h2>Envíos</h2>
+  <div class="info-grid">
+    <div class="info"><b>🚚 CABA / GBA</b><p>Envío gratis.</p></div>
+    <div class="info"><b>📦 Otras zonas</b><p>El envío queda a cargo del comprador. Podés consultar por Vía Cargo, Correo Argentino o Andreani.</p></div>
+    <div class="info"><b>💬 Stock</b><p>Todos los productos se muestran como “A consultar” hasta confirmar disponibilidad.</p></div>
+  </div>
+</section>
+
+<section id="contacto" class="contact">
+  <div class="wrap contact-inner">
+    <div><p class="eyebrow">CONTACTO</p><h2>LS Neumáticos</h2><p>Consultas y pedidos por WhatsApp.</p></div>
+    <a class="btn primary" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos" target="_blank">11 3259-8895</a>
+  </div>
+</section>
+</main>
+
+<div id="cartModal" class="modal" aria-hidden="true">
+ <div class="modal-box"><button class="close" onclick="closeCart()">×</button><h2>Tu carrito</h2><div id="cartItems"></div><div class="cart-total">Total: <b id="cartTotal">$0</b></div>
+ <button class="btn primary full" onclick="checkoutWhatsApp()">Enviar pedido por WhatsApp</button></div>
+</div>
+<script src="products.js"></script><script src="app.js"></script>
+</body></html>

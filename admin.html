@@ -1,0 +1,14 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LS Neumáticos | Administración</title><link rel="stylesheet" href="styles.css"></head><body>
+<header class="top"><div class="wrap nav"><a class="brand" href="index.html"><span class="brand-mark">LS</span><span>NEUMÁTICOS</span></a><a href="index.html">← Volver a la tienda</a></div></header>
+<main class="wrap section"><p class="eyebrow">ADMINISTRACIÓN LOCAL</p><h1>Editar productos y precios</h1><p class="notice">Los cambios se guardan en este navegador. Para publicar cambios en todos los dispositivos habrá que conectar un sistema de administración/base de datos.</p>
+<div id="admin"></div><button class="btn primary" onclick="addProduct()">+ Agregar producto</button> <button class="btn outline" onclick="resetProducts()">Restaurar productos iniciales</button>
+</main><script src="products.js"></script><script>
+let products=JSON.parse(localStorage.getItem("ls_products")||"null")||defaultProducts;
+function save(){localStorage.setItem("ls_products",JSON.stringify(products));}
+function render(){document.getElementById("admin").innerHTML=products.map((p,i)=>`<div class="admin-row">
+<input value="${esc(p.name)}" onchange="products[${i}].name=this.value;save()"><input value="${esc(p.category)}" onchange="products[${i}].category=this.value;save()"><input type="number" value="${p.price||0}" onchange="products[${i}].price=Number(this.value);save()"><button onclick="products.splice(${i},1);save();render()">Eliminar</button></div>`).join("");}
+function esc(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll('"',"&quot;");}
+function addProduct(){products.push({id:Date.now(),name:"Nuevo producto",brand:"LS Neumáticos",category:"Neumáticos",price:0,description:"Consultar disponibilidad y precio."});save();render();}
+function resetProducts(){if(confirm("¿Restaurar? Se perderán los cambios locales.")){localStorage.removeItem("ls_products");products=defaultProducts;render();}}
+render();
+</script></body></html>
