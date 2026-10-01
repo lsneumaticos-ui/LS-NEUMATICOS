@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80" role="img" aria-label="LS Neumáticos">
+<rect width="220" height="80" rx="18" fill="#0b0b0b"/>
+<circle cx="40" cy="40" r="30" fill="#111" stroke="#fff" stroke-width="2"/>
+<path d="M17 40a23 23 0 0 1 46 0" fill="none" stroke="#e51d35" stroke-width="8" stroke-linecap="round"/>
+<path d="M22 28l6 7M31 20l5 9M43 19l-2 10M54 25l-6 8" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+<text x="40" y="51" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="27" font-weight="900" fill="#e51d35">LS</text>
+<text x="78" y="38" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="900" fill="#fff" letter-spacing="1">NEUMÁTICOS</text>
+<text x="78" y="57" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="700" fill="#ccc" letter-spacing="2">POTENCIA Y SERVICIO</text>
+</svg>
