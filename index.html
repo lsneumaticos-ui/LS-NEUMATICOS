@@ -3,74 +3,106 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LS Neumáticos | Neumáticos y ruedas de auxilio</title>
-<meta name="description" content="LS Neumáticos - neumáticos, ruedas de auxilio y asesoramiento.">
+<title>LS Neumáticos | Neumáticos, llantas originales y ruedas de auxilio</title>
+<meta name="description" content="LS Neumáticos: neumáticos, llantas originales, ruedas de auxilio y asesoramiento por vehículo.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header class="top">
   <div class="wrap nav">
-    <a class="brand" href="index.html"><span class="brand-mark">LS</span><span>NEUMÁTICOS</span></a>
-    <nav><a href="#catalogo">Catálogo</a><a href="#auxilio">Ruedas de auxilio</a><a href="#envios">Envíos</a><a href="#contacto">Contacto</a></nav>
+    <a class="brand" href="index.html" aria-label="LS Neumáticos"><span class="brand-mark">LS</span><span>NEUMÁTICOS</span></a>
+    <nav>
+      <a href="#buscar">Buscar</a><a href="#catalogo">Neumáticos</a><a href="#llantas">Llantas originales</a><a href="#auxilio">Ruedas de auxilio</a><a href="#envios">Envíos</a>
+    </nav>
     <button class="cart-btn" onclick="openCart()">🛒 Carrito <b id="cartCount">0</b></button>
   </div>
 </header>
 
-<section class="hero">
+<section class="hero" id="buscar">
   <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow">LS NEUMÁTICOS</p>
-      <h1>Neumáticos y ruedas de auxilio para tu vehículo</h1>
-      <p class="lead">Consultá medidas, disponibilidad y precios. Atención personalizada por WhatsApp.</p>
-      <a class="btn primary" href="#catalogo">Ver catálogo</a>
-      <a class="btn outline" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos,%20quiero%20consultar%20por%20un%20producto." target="_blank">WhatsApp</a>
+    <div class="hero-copy">
+      <p class="eyebrow">LS NEUMÁTICOS · CABA / GBA</p>
+      <h1>Encontrá el producto correcto para tu vehículo.</h1>
+      <p class="lead">Buscá neumáticos y llantas originales por vehículo, medida o código OEM. Si no estás seguro, te asesoramos por WhatsApp.</p>
+      <div class="hero-actions"><a class="btn primary" href="#buscador">Buscar por vehículo</a><a class="btn outline" href="https://wa.me/541132598895?text=Hola%20LS%20Neumáticos,%20necesito%20asesoramiento%20para%20mi%20vehículo." target="_blank" rel="noopener">WhatsApp</a></div>
     </div>
-    <div class="hero-card">
-      <div class="tire">◉</div>
-      <strong>¿No sabés qué medida necesitás?</strong>
-      <span>Mandanos una foto de tu cubierta o del vehículo y te asesoramos.</span>
+    <div class="search-panel" id="buscador">
+      <div class="panel-tabs">
+        <button class="tab active" onclick="setSearchMode('vehiculo',this)">🚗 Vehículo</button>
+        <button class="tab" onclick="setSearchMode('medida',this)">📐 Medida</button>
+        <button class="tab" onclick="setSearchMode('oem',this)">🔎 OEM</button>
+      </div>
+      <div id="searchModeVehiculo" class="search-mode">
+        <h2>Buscá por vehículo</h2><p>Seleccioná los datos que conozcas.</p>
+        <div class="selector-grid">
+          <select id="vehicleBrand" onchange="updateVehicleModels()"><option value="">Marca</option></select>
+          <select id="vehicleModel" onchange="updateVehicleYears()" disabled><option value="">Modelo</option></select>
+          <select id="vehicleYear" disabled><option value="">Año</option></select>
+        </div>
+        <button class="btn primary full" onclick="searchByVehicle()">Ver productos compatibles</button>
+      </div>
+      <div id="searchModeMedida" class="search-mode hidden">
+        <h2>Buscá por medida</h2><p>Ideal para neumáticos y llantas.</p>
+        <div class="selector-grid">
+          <input id="sizeWidth" placeholder="Ancho ej. 205"><input id="sizeProfile" placeholder="Perfil ej. 55"><input id="sizeRim" placeholder="Rodado ej. 16">
+        </div>
+        <button class="btn primary full" onclick="searchBySize()">Buscar por medida</button>
+      </div>
+      <div id="searchModeOem" class="search-mode hidden">
+        <h2>Buscá por código OEM</h2><p>Ingresá el número de pieza de la llanta.</p>
+        <input id="oemSearch" class="wide-input" placeholder="Ej. 42611-XXXXX">
+        <button class="btn primary full" onclick="searchByOEM()">Buscar OEM</button>
+      </div>
+      <div class="search-note">También podés enviarnos una foto de tu vehículo o de la llanta.</div>
     </div>
   </div>
 </section>
 
-<main>
+<section class="wrap section categories">
+  <p class="eyebrow">CATEGORÍAS</p><h2>Todo para tu vehículo</h2>
+  <div class="category-grid">
+    <a class="category-card" href="#catalogo" onclick="filterCategory('Neumáticos')"><span>◉</span><b>Neumáticos</b><small>Medidas y marcas</small></a>
+    <a class="category-card featured" href="#llantas" onclick="filterCategory('Llantas originales')"><span>◈</span><b>Llantas originales</b><small>OEM por vehículo y código</small></a>
+    <a class="category-card" href="#auxilio"><span>⊙</span><b>Ruedas de auxilio</b><small>Incluye vehículos chinos</small></a>
+    <a class="category-card" href="#catalogo" onclick="filterCategory('Llantas deportivas')"><span>✦</span><b>Llantas deportivas</b><small>Consultar modelos</small></a>
+  </div>
+</section>
+
 <section id="catalogo" class="wrap section">
-  <div class="section-head"><div><p class="eyebrow">CATÁLOGO</p><h2>Productos</h2></div>
-    <input id="search" class="search" placeholder="Buscar medida, marca o vehículo..." oninput="renderProducts()">
+  <div class="section-head"><div><p class="eyebrow">CATÁLOGO</p><h2>Productos</h2><p class="muted">Precio y stock se confirman antes de cerrar el pedido.</p></div>
+    <input id="search" class="search" placeholder="Buscar medida, marca, modelo u OEM..." oninput="renderProducts()">
   </div>
   <div class="chips" id="chips"></div>
   <div id="products" class="products"></div>
+</section>
+
+<section id="llantas" class="llanta-section">
+  <div class="wrap two">
+    <div><p class="eyebrow">LLANTAS ORIGINALES OEM</p><h2>Encontrá la llanta original de tu vehículo.</h2>
+      <p>Podemos identificarla por marca, modelo, año, versión, medidas técnicas o número OEM.</p>
+      <div class="oem-points"><span>✓ Código OEM</span><span>✓ Compatibilidad</span><span>✓ Rodado y PCD</span><span>✓ ET y centro</span></div>
+      <a class="btn primary" href="#buscador" onclick="setSearchMode('oem',document.querySelectorAll('.tab')[2])">Buscar por OEM</a>
+    </div>
+    <div class="llanta-card"><div class="rim-icon">◈</div><b>Ficha de cada llanta</b><p>Marca · modelo · año · versión · OEM · rodado · PCD · ET · centro · estado · precio.</p><small>Los datos técnicos se cargarán y editarán desde el catálogo.</small></div>
+  </div>
 </section>
 
 <section id="auxilio" class="dark-section">
   <div class="wrap two">
     <div><p class="eyebrow">RUEDAS DE AUXILIO</p><h2>¿Tu vehículo chino no trae rueda de auxilio?</h2>
     <p>Consultanos por opciones compatibles para BYD, Haval, Link & Co y otros modelos.</p>
-    <a class="btn primary" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos,%20quiero%20consultar%20por%20una%20rueda%20de%20auxilio." target="_blank">Consultar por WhatsApp</a></div>
+    <a class="btn primary" href="https://wa.me/541132598895?text=Hola%20LS%20Neumáticos,%20quiero%20consultar%20por%20una%20rueda%20de%20auxilio." target="_blank" rel="noopener">Consultar por WhatsApp</a></div>
     <div class="feature-list"><div>✓ Compatibilidad por modelo</div><div>✓ Asesoramiento</div><div>✓ Precio a consultar</div></div>
   </div>
 </section>
 
 <section id="envios" class="wrap section">
   <p class="eyebrow">ENTREGAS</p><h2>Envíos</h2>
-  <div class="info-grid">
-    <div class="info"><b>🚚 CABA / GBA</b><p>Envío gratis.</p></div>
-    <div class="info"><b>📦 Otras zonas</b><p>El envío queda a cargo del comprador. Podés consultar por Vía Cargo, Correo Argentino o Andreani.</p></div>
-    <div class="info"><b>💬 Stock</b><p>Todos los productos se muestran como “A consultar” hasta confirmar disponibilidad.</p></div>
-  </div>
+  <div class="info-grid"><div class="info"><b>🚚 CABA / GBA</b><p>Envío gratis.</p></div><div class="info"><b>📦 Otras zonas</b><p>El envío queda a cargo del comprador. Consultá Vía Cargo, Correo Argentino o Andreani.</p></div><div class="info"><b>💬 Stock</b><p>Todos los productos se muestran como “A consultar” hasta confirmar disponibilidad.</p></div></div>
 </section>
 
-<section id="contacto" class="contact">
-  <div class="wrap contact-inner">
-    <div><p class="eyebrow">CONTACTO</p><h2>LS Neumáticos</h2><p>Consultas y pedidos por WhatsApp.</p></div>
-    <a class="btn primary" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos" target="_blank">11 3259-8895</a>
-  </div>
-</section>
-</main>
+<section id="contacto" class="contact"><div class="wrap contact-inner"><div><p class="eyebrow">CONTACTO</p><h2>LS Neumáticos</h2><p>Consultas y pedidos por WhatsApp.</p></div><a class="btn primary" href="https://wa.me/541132598895?text=Hola%20LS%20Neumáticos" target="_blank" rel="noopener">11 3259-8895</a></div></section>
 
-<div id="cartModal" class="modal" aria-hidden="true">
- <div class="modal-box"><button class="close" onclick="closeCart()">×</button><h2>Tu carrito</h2><div id="cartItems"></div><div class="cart-total">Total: <b id="cartTotal">$0</b></div>
- <button class="btn primary full" onclick="checkoutWhatsApp()">Enviar pedido por WhatsApp</button></div>
-</div>
+<div id="cartModal" class="modal" aria-hidden="true"><div class="modal-box"><button class="close" onclick="closeCart()">×</button><h2>Tu carrito</h2><div id="cartItems"></div><div class="cart-total">Total: <b id="cartTotal">$0</b></div><button class="btn primary full" onclick="checkoutWhatsApp()">Enviar pedido por WhatsApp</button></div></div>
 <script src="products.js"></script><script src="app.js"></script>
 </body></html>
