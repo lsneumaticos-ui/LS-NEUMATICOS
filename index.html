@@ -3,74 +3,272 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LS Neumáticos | Neumáticos y ruedas de auxilio</title>
-<meta name="description" content="LS Neumáticos - neumáticos, ruedas de auxilio y asesoramiento.">
+<title>LS Neumáticos | Neumáticos, llantas originales y ruedas de auxilio</title>
+<meta name="description" content="LS Neumáticos: buscá neumáticos, llantas originales y ruedas de auxilio por medida, vehículo o OEM. Envíos gratis a CABA y GBA.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header class="top">
-  <div class="wrap nav">
-    <a class="brand" href="index.html"><span class="brand-mark">LS</span><span>NEUMÁTICOS</span></a>
-    <nav><a href="#catalogo">Catálogo</a><a href="#auxilio">Ruedas de auxilio</a><a href="#envios">Envíos</a><a href="#contacto">Contacto</a></nav>
-    <button class="cart-btn" onclick="openCart()">🛒 Carrito <b id="cartCount">0</b></button>
+<div class="top-strip">
+  <div class="wrap top-strip-inner">
+    <span>🚚 Envíos gratis a CABA y GBA</span>
+    <span>💬 Atención por WhatsApp</span>
+    <span>🔎 Buscá por medida, vehículo u OEM</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap header-main">
+    <a class="brand-lockup" href="index.html" aria-label="LS Neumáticos">
+      <img src="assets/logo-ls.webp" alt="LS Neumáticos" class="brand-logo">
+      <span class="brand-name">LS <b>NEUMÁTICOS</b></span>
+    </a>
+    <div class="header-search">
+      <input id="searchTop" type="search" placeholder="¿Qué buscás? Ej. 185/60 R15, Cronos, OEM 100275508" oninput="syncTopSearch()">
+      <button class="search-button" onclick="goCatalog()">Buscar</button>
+    </div>
+    <div class="header-actions">
+      <a class="header-link" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos,%20quiero%20consultar." target="_blank">WhatsApp</a>
+      <button class="cart-btn" onclick="openCart()">🛒 <span>Carrito</span> <b id="cartCount">0</b></button>
+    </div>
+  </div>
+  <div class="nav-wrap">
+    <div class="wrap nav-main">
+      <a href="#neumaticos">NEUMÁTICOS</a>
+      <a href="#llantas">LLANTAS ORIGINALES</a>
+      <a href="#auxilio">RUEDAS DE AUXILIO</a>
+      <a href="#deportivas">LLANTAS DEPORTIVAS</a>
+      <a href="#servicios">SERVICIOS</a>
+      <a href="#contacto">CONTACTO</a>
+    </div>
   </div>
 </header>
 
 <section class="hero">
-  <div class="wrap hero-grid">
+  <div class="wrap hero-content">
+    <div class="hero-copy">
+      <span class="eyebrow">LS NEUMÁTICOS</span>
+      <h1>Encontrá la rueda correcta para tu vehículo.</h1>
+      <p>Comprá o consultá neumáticos, llantas originales y ruedas de auxilio con una búsqueda simple por medida, vehículo u OEM.</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#buscador">Buscar mi producto</a>
+        <a class="btn light-outline" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos,%20necesito%20asesoramiento." target="_blank">Hablar por WhatsApp</a>
+      </div>
+      <div class="hero-highlights">
+        <span>✓ Stock: A consultar</span>
+        <span>✓ CABA / GBA: envío gratis</span>
+        <span>✓ Asesoramiento personalizado</span>
+      </div>
+    </div>
+    <div class="hero-showcase">
+      <div class="hero-glow"></div>
+      <div class="showcase-wheel">
+        <img src="images/llantas-cronos/cronos-diseno-01.webp" alt="Llanta Fiat Cronos Diseño 01">
+      </div>
+      <div class="showcase-card">
+        <span class="showcase-label">CATÁLOGO DESTACADO</span>
+        <strong>Fiat Cronos</strong>
+        <small>Llanta original Diseño 01 · Gris plata / Gris Visón</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="buscador" class="vehicle-finder">
+  <div class="wrap">
+    <div class="finder-title">
+      <div>
+        <span class="eyebrow">BUSCADOR</span>
+        <h2>Encontrá el neumático o la llanta que buscás</h2>
+      </div>
+      <span class="finder-note">Podés buscar también por OEM.</span>
+    </div>
+
+    <div class="finder-grid">
+      <label>Marca del vehículo
+        <select id="vBrand">
+          <option value="">Seleccionar</option>
+          <option>Fiat</option><option>Volkswagen</option><option>Ford</option><option>Chevrolet</option>
+          <option>Peugeot</option><option>Citroën</option><option>Renault</option><option>Toyota</option>
+          <option>Jeep</option><option>Honda</option><option>Hyundai</option><option>Kia</option>
+          <option>Nissan</option><option>Haval</option><option>BYD</option><option>Chery</option>
+          <option>Otra</option>
+        </select>
+      </label>
+      <label>Modelo
+        <input id="vModel" placeholder="Ej. Cronos">
+      </label>
+      <label>Año
+        <input id="vYear" inputmode="numeric" placeholder="Ej. 2026">
+      </label>
+      <label>Versión
+        <input id="vVersion" placeholder="Ej. Precision">
+      </label>
+      <label>Ancho
+        <select id="vWidth">
+          <option value="">Ancho</option><option>165</option><option>175</option><option>185</option><option>195</option>
+          <option>205</option><option>215</option><option>225</option><option>235</option><option>245</option>
+        </select>
+      </label>
+      <label>Perfil
+        <select id="vProfile">
+          <option value="">Perfil</option><option>35</option><option>40</option><option>45</option><option>50</option>
+          <option>55</option><option>60</option><option>65</option><option>70</option><option>75</option>
+        </select>
+      </label>
+      <label>Rodado
+        <select id="vRim">
+          <option value="">Rodado</option><option>13</option><option>14</option><option>15</option><option>16</option>
+          <option>17</option><option>18</option><option>19</option><option>20</option>
+        </select>
+      </label>
+      <label>OEM
+        <input id="vOem" placeholder="Ej. 100275508">
+      </label>
+    </div>
+    <div class="finder-actions">
+      <button class="btn primary" onclick="vehicleSearch()">Buscar compatibilidad</button>
+      <button class="btn ghost" onclick="clearVehicleSearch()">Limpiar</button>
+    </div>
+  </div>
+</section>
+
+<section class="quick-categories" id="neumaticos">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">CATEGORÍAS</span><h2>Todo en un solo lugar</h2></div>
+    </div>
+    <div class="category-grid">
+      <a class="category-card" href="#catalogo" onclick="filterCategory('Neumáticos')">
+        <span class="category-icon">◉</span><strong>Neumáticos</strong><small>Auto · Camioneta · Más</small>
+      </a>
+      <a class="category-card" href="#catalogo" id="llantas" onclick="filterCategory('Llantas Fiat Cronos')">
+        <span class="category-icon">✦</span><strong>Llantas originales</strong><small>Fiat y próximos catálogos OEM</small>
+      </a>
+      <a class="category-card" href="#auxilio">
+        <span class="category-icon">⬡</span><strong>Ruedas de auxilio</strong><small>Incluidos vehículos sin auxilio</small>
+      </a>
+      <a class="category-card" href="#deportivas">
+        <span class="category-icon">◆</span><strong>Llantas deportivas</strong><small>Catálogo a incorporar</small>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="brands-section">
+  <div class="wrap">
+    <div class="brands-head">
+      <div><span class="eyebrow">BUSCAR POR VEHÍCULO</span><h2>Marcas</h2></div>
+      <span>Elegí una marca y luego completá modelo, año y versión.</span>
+    </div>
+    <div class="brand-grid">
+      <button onclick="pickBrand('Fiat')">Fiat</button><button onclick="pickBrand('Volkswagen')">Volkswagen</button><button onclick="pickBrand('Ford')">Ford</button><button onclick="pickBrand('Chevrolet')">Chevrolet</button><button onclick="pickBrand('Peugeot')">Peugeot</button><button onclick="pickBrand('Renault')">Renault</button><button onclick="pickBrand('Toyota')">Toyota</button><button onclick="pickBrand('Jeep')">Jeep</button><button onclick="pickBrand('Honda')">Honda</button><button onclick="pickBrand('Nissan')">Nissan</button><button onclick="pickBrand('BYD')">BYD</button><button onclick="pickBrand('Haval')">Haval</button><button onclick="pickBrand('Chery')">Chery</button><button onclick="pickBrand('Kia')">Kia</button><button onclick="pickBrand('Hyundai')">Hyundai</button><button onclick="pickBrand('Citroën')">Citroën</button>
+    </div>
+  </div>
+</section>
+
+<section id="catalogo" class="catalog-section">
+  <div class="wrap section">
+    <div class="section-head catalog-head">
+      <div><span class="eyebrow">DESTACADOS</span><h2>Productos</h2><p class="section-sub">La ficha de cada producto muestra la información confirmada y deja pendiente lo que todavía deba verificarse.</p></div>
+      <div class="catalog-tools">
+        <input id="search" class="search" placeholder="Buscar medida, marca, vehículo, OEM..." oninput="renderProducts()">
+        <div class="chips" id="chips"></div>
+      </div>
+    </div>
+    <div id="products" class="products"></div>
+  </div>
+</section>
+
+<section id="auxilio" class="split-section dark-bg">
+  <div class="wrap split-grid">
     <div>
-      <p class="eyebrow">LS NEUMÁTICOS</p>
-      <h1>Neumáticos y ruedas de auxilio para tu vehículo</h1>
-      <p class="lead">Consultá medidas, disponibilidad y precios. Atención personalizada por WhatsApp.</p>
-      <a class="btn primary" href="#catalogo">Ver catálogo</a>
-      <a class="btn outline" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos,%20quiero%20consultar%20por%20un%20producto." target="_blank">WhatsApp</a>
+      <span class="eyebrow">RUEDAS DE AUXILIO</span>
+      <h2>¿Tu vehículo no trae rueda de auxilio?</h2>
+      <p>Consultá opciones para BYD, Haval, Chery, Link &amp; Co y otros modelos. La compatibilidad se confirma antes de cerrar el pedido.</p>
+      <a class="btn primary" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos,%20quiero%20consultar%20por%20una%20rueda%20de%20auxilio." target="_blank">Consultar por WhatsApp</a>
     </div>
-    <div class="hero-card">
-      <div class="tire">◉</div>
-      <strong>¿No sabés qué medida necesitás?</strong>
-      <span>Mandanos una foto de tu cubierta o del vehículo y te asesoramos.</span>
+    <div class="feature-stack">
+      <div><b>01</b><span>Compatibilidad por vehículo</span></div>
+      <div><b>02</b><span>Medida y encastre a confirmar</span></div>
+      <div><b>03</b><span>Stock y precio a consultar</span></div>
     </div>
   </div>
 </section>
 
-<main>
-<section id="catalogo" class="wrap section">
-  <div class="section-head"><div><p class="eyebrow">CATÁLOGO</p><h2>Productos</h2></div>
-    <input id="search" class="search" placeholder="Buscar medida, marca o vehículo..." oninput="renderProducts()">
-  </div>
-  <div class="chips" id="chips"></div>
-  <div id="products" class="products"></div>
-</section>
-
-<section id="auxilio" class="dark-section">
-  <div class="wrap two">
-    <div><p class="eyebrow">RUEDAS DE AUXILIO</p><h2>¿Tu vehículo chino no trae rueda de auxilio?</h2>
-    <p>Consultanos por opciones compatibles para BYD, Haval, Link & Co y otros modelos.</p>
-    <a class="btn primary" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos,%20quiero%20consultar%20por%20una%20rueda%20de%20auxilio." target="_blank">Consultar por WhatsApp</a></div>
-    <div class="feature-list"><div>✓ Compatibilidad por modelo</div><div>✓ Asesoramiento</div><div>✓ Precio a consultar</div></div>
+<section id="deportivas" class="product-band">
+  <div class="wrap product-band-inner">
+    <div><span class="eyebrow">LLANTAS DEPORTIVAS</span><h2>Una categoría preparada para crecer.</h2><p>La tienda queda preparada para incorporar diseños deportivos y accesorios sin mezclar información con las llantas originales OEM.</p></div>
+    <div class="band-pill">PRÓXIMAMENTE</div>
   </div>
 </section>
 
-<section id="envios" class="wrap section">
-  <p class="eyebrow">ENTREGAS</p><h2>Envíos</h2>
-  <div class="info-grid">
-    <div class="info"><b>🚚 CABA / GBA</b><p>Envío gratis.</p></div>
-    <div class="info"><b>📦 Otras zonas</b><p>El envío queda a cargo del comprador. Podés consultar por Vía Cargo, Correo Argentino o Andreani.</p></div>
-    <div class="info"><b>💬 Stock</b><p>Todos los productos se muestran como “A consultar” hasta confirmar disponibilidad.</p></div>
+<section id="servicios" class="services-section">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">SERVICIO</span><h2>Asesoramiento que evita errores</h2></div></div>
+    <div class="service-grid">
+      <article><span>01</span><h3>Elegí por medida</h3><p>Ingresá ancho, perfil y rodado para reducir la búsqueda.</p></article>
+      <article><span>02</span><h3>Elegí por vehículo</h3><p>Buscá por marca, modelo, año y versión cuando esa información esté documentada.</p></article>
+      <article><span>03</span><h3>Confirmá por WhatsApp</h3><p>Antes de comprar, verificamos disponibilidad, precio y compatibilidad.</p></article>
+    </div>
   </div>
 </section>
 
-<section id="contacto" class="contact">
-  <div class="wrap contact-inner">
-    <div><p class="eyebrow">CONTACTO</p><h2>LS Neumáticos</h2><p>Consultas y pedidos por WhatsApp.</p></div>
-    <a class="btn primary" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos" target="_blank">11 3259-8895</a>
+<section id="envios" class="shipping-section">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">ENTREGAS</span><h2>Envíos</h2></div></div>
+    <div class="shipping-grid">
+      <div><b>🚚 CABA / GBA</b><strong>Gratis</strong><p>Envío bonificado para CABA y GBA.</p></div>
+      <div><b>📦 Otras zonas</b><strong>A cargo del comprador</strong><p>Consultá Vía Cargo, Correo Argentino o Andreani.</p></div>
+      <div><b>📋 Stock</b><strong>A consultar</strong><p>La disponibilidad se confirma antes del pedido.</p></div>
+    </div>
   </div>
 </section>
-</main>
+
+<section id="contacto" class="contact-section">
+  <div class="wrap contact-box">
+    <div>
+      <span class="eyebrow">CONTACTO</span>
+      <h2>LS Neumáticos</h2>
+      <p>Pedinos compatibilidad, disponibilidad, precio y envío.</p>
+    </div>
+    <a class="btn primary big" href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos,%20quiero%20hacer%20una%20consulta." target="_blank">WhatsApp 11 3259-8895</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div><img src="assets/logo-ls.webp" alt="LS Neumáticos" class="footer-logo"><p>Neumáticos · llantas originales · ruedas de auxilio</p></div>
+    <div><b>TIENDA</b><a href="#neumaticos">Neumáticos</a><a href="#llantas">Llantas originales</a><a href="#auxilio">Ruedas de auxilio</a><a href="#servicios">Asesoramiento</a></div>
+    <div><b>ENVÍOS</b><span>CABA / GBA gratis</span><span>Resto del país a cargo del comprador</span><span>Vía Cargo · Correo Argentino · Andreani</span></div>
+    <div><b>CONTACTO</b><a href="https://wa.me/541132598895?text=Hola%20LS%20Neum%C3%A1ticos" target="_blank">11 3259-8895</a><span>Stock y precio: A consultar</span></div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 LS Neumáticos · Catálogo online</div>
+</footer>
 
 <div id="cartModal" class="modal" aria-hidden="true">
  <div class="modal-box"><button class="close" onclick="closeCart()">×</button><h2>Tu carrito</h2><div id="cartItems"></div><div class="cart-total">Total: <b id="cartTotal">$0</b></div>
  <button class="btn primary full" onclick="checkoutWhatsApp()">Enviar pedido por WhatsApp</button></div>
 </div>
+
+<script>
+function goCatalog(){
+  const q=document.getElementById('searchTop')?.value||'';
+  const target=document.getElementById('search');
+  if(target){target.value=q;renderProducts();}
+  document.getElementById('catalogo')?.scrollIntoView({behavior:'smooth'});
+}
+function syncTopSearch(){ if((document.getElementById('searchTop')?.value||'').length>1){ goCatalog(); } }
+function vehicleSearch(){
+  const v=[document.getElementById('vBrand').value,document.getElementById('vModel').value,document.getElementById('vYear').value,document.getElementById('vVersion').value,document.getElementById('vWidth').value && document.getElementById('vProfile').value && document.getElementById('vRim').value ? document.getElementById('vWidth').value+'/'+document.getElementById('vProfile').value+' R'+document.getElementById('vRim').value : '',document.getElementById('vOem').value].filter(Boolean);
+  const q=v.join(' ');
+  document.getElementById('search').value=q;renderProducts();
+  document.getElementById('catalogo').scrollIntoView({behavior:'smooth'});
+}
+function clearVehicleSearch(){
+  ['vBrand','vModel','vYear','vVersion','vWidth','vProfile','vRim','vOem'].forEach(id=>{const e=document.getElementById(id); if(e)e.value='';});
+}
+function pickBrand(b){document.getElementById('vBrand').value=b;document.getElementById('buscador').scrollIntoView({behavior:'smooth'});}
+function filterCategory(c){selectedCategory=c;renderChips();renderProducts();}
+</script>
 <script src="products.js"></script><script src="app.js"></script>
 </body></html>
