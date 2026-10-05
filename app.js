@@ -1,4 +1,7 @@
-let products = JSON.parse(localStorage.getItem("ls_products") || "null") || defaultProducts;
+const storedProducts = JSON.parse(localStorage.getItem("ls_products") || "null");
+let products = Array.isArray(storedProducts)
+  ? [...storedProducts, ...defaultProducts.filter(d => !storedProducts.some(s => s.id === d.id))]
+  : defaultProducts;
 let cart = JSON.parse(localStorage.getItem("ls_cart") || "[]");
 let selectedCategory = "Todos";
 
