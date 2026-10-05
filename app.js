@@ -18,17 +18,34 @@ function renderChips(){
  const cats=["Todos",...new Set(products.map(p=>p.category))];
  document.getElementById("chips").innerHTML=cats.map(c=>`<button class="chip ${c===selectedCategory?"active":""}" onclick="selectedCategory='${String(c).replaceAll("'","\\'")}';renderChips();renderProducts()">${escHtml(c)}</button>`).join("");
 }
-function renderProducts(){
- const q=(document.getElementById("search")?.value||"").toLowerCase().trim();
- const list=products.filter(p=>{
-  if(selectedCategory!=="Todos"&&p.category!==selectedCategory) return false;
+function productMatchesFilters(p,q){
+  const filterBrand=document.getElementById("filterBrand")?.value||"";
+  const filterRim=document.getElementById("filterRim")?.value||"";
+  const filterPcd=document.getElementById("filterPcd")?.value||"";
+  const filterMaterial=document.getElementById("filterMaterial")?.value||"";
+  const filterFinish=(document.getElementById("filterFinish")?.value||"").toLowerCase();
+  if(filterBrand && String(p.brand||"")!==filterBrand && String(p.marca||"")!==filterBrand) return false;
+  if(filterRim && String(p.rodado||"")!==filterRim) return false;
+  if(filterPcd && String(p.pcd||"")!==filterPcd) return false;
+  if(filterMaterial && !String(p.material||"").toLowerCase().includes(filterMaterial.toLowerCase())) return false;
+  if(filterFinish && !String(p.acabado||"").toLowerCase().includes(filterFinish)) return false;
+  if(selectedCategory!=="Todos" && p.category!==selectedCategory) return false;
   if(!q) return true;
   const searchText=[
-   p.name,p.brand,p.marca,p.modelo,p.version,p.rodado,p.anios,p.acabado,
-   p.oem,p.pcd,p.et,p.neumaticoMedida,p.neumaticoModelo,p.category
+    p.name,p.brand,p.marca,p.modelo,p.version,p.rodado,p.anios,p.acabado,
+    p.oem,p.pcd,p.et,p.neumaticoMedida,p.neumaticoModelo,p.category,
+    p.material,p.ancho,p.centroMaza
   ].filter(Boolean).join(" ").toLowerCase();
   return searchText.includes(q);
- });
+}
+function renderProducts(){
+ const q=(document.getElementById("search")?.value||"").toLowerCase().trim();
+ let list=products.filter(p=>productMatchesFilters(p,q));
+ const sort=document.getElementById("sortProducts")?.value||"relevance";
+ if(sort==="name") list.sort((a,b)=>String(a.name||"").localeCompare(String(b.name||""),"es"));
+ if(sort==="name-desc") list.sort((a,b)=>String(b.name||"").localeCompare(String(a.name||""),"es"));
+ if(sort==="rim") list.sort((a,b)=>(Number(a.rodado)||0)-(Number(b.rodado)||0));
+ if(sort==="rim-desc") list.sort((a,b)=>(Number(b.rodado)||0)-(Number(a.rodado)||0));
  document.getElementById("products").innerHTML=list.map(p=>{
   const img=p.imagen||p.image;
   const imageHtml=img
@@ -46,6 +63,8 @@ function renderProducts(){
   if(p.et) tech.push(["ET",p.et]);
   if(p.pcd) tech.push(["PCD",p.pcd]);
   if(p.centroMaza) tech.push(["Centro de maza",p.centroMaza]);
+  if(p.material) tech.push(["Material",p.material]);
+  if(p.acabado) tech.push(["Acabado",p.acabado]);
   if(p.neumaticoMedida) tech.push(["Neumático",p.neumaticoMedida]);
   if(p.neumaticoModelo) tech.push(["Modelo neumático",p.neumaticoModelo]);
   const techBlock=tech.length
@@ -64,7 +83,7 @@ function renderProducts(){
     <button class="btn dark full" onclick="addToCart(${Number(p.id)})">Agregar al carrito</button>
    </div>
   </article>`;
- }).join("") || '<div class="empty">No encontramos productos con esa búsqueda.</div>';
+ }).join("") || '<div class="empty">No encontramos productos con esos filtros.</div>';
 }
 function addToCart(id){const p=products.find(x=>x.id===id); if(!p)return; cart.push({...p,qty:1}); saveCart(); openCart();}
 function saveCart(){localStorage.setItem("ls_cart",JSON.stringify(cart));document.getElementById("cartCount").textContent=cart.length;}
